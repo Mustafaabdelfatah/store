@@ -1,0 +1,8 @@
+{
+
+    "blade.format.enable": true,
+    "editor.formatOnPaste": true,
+    "editor.fontLigatures": null,
+    "php.validate.executablePath": "",
+
+}
