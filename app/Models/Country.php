@@ -9,7 +9,7 @@ class Country extends Model
 {
     use HasFactory;
 
-    protected $fillable = array('countrycode ','countryname');
+    protected $fillable = array( 'name','short_code',);
 
     protected $table = 'countries';
 

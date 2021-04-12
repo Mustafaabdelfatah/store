@@ -24,22 +24,18 @@
                     <form id="accountForm" name="accountForm" action="{{ url('/account') }}" method="POST">
                         {{ csrf_field() }}
                         <input value="{{ $userDetails->email }}" readonly="" />
-                        <input value="{{ $userDetails->name }}" id="name" name="name" title="Name" type="text" placeholder="ادخل Name" />
-                        <input title="العنوان" value="{{ $userDetails->address }}"  id="address" name="address" placeholder="العنوان" type="text" />
-                        <input title="المدينه" value="{{ $userDetails->city }}" id="city" name="city" placeholder="المدينه" type="text" />
-                        <select id="country" name="country">
+                        <input value="{{ $userDetails->name }}" id="name" name="name" title="Name" type="text" placeholder="Enter Name" />
+                        <input title="العنوان" value="{{ $userDetails->address }}"  id="address" name="address" placeholder="Address" type="text" />
+                        <input title="المدينه" value="{{ $userDetails->city }}" id="city" name="city" placeholder="city" type="text" />
+                        <select id="country" name="country" class="country">
                             <option value="">Select Country</option>
-                            @foreach($countries as $country)
 
-                            <option value="{{ $country->name }}" @if($country->name == $userDetails->country) selected
-                                @endif>{{ $country->name }}</option>
-                            @endforeach
                         </select>
                         <input value="{{ $userDetails->pincode }}" style="margin-top: 10px;" id="pincode" name="pincode"
                             type="text" placeholder="Pincode" />
                         <input value="{{ $userDetails->mobile }}" id="mobile" name="mobile" type="text"
                             placeholder="Mobile" />
-                        <button type="submit" class="btn btn-default">تحديث</button>
+                        <button type="submit" class="btn btn-default">Update</button>
                     </form>
                 </div>
             </div>
@@ -57,7 +53,7 @@
                         <input type="password" name="new_pwd" id="new_pwd" required placeholder="New Password">
                         <input type="password" name="confirm_pwd" id="confirm_pwd" required
                             placeholder="Confirm Password">
-                        <button type="submit" class="btn btn-default">تحديث</button>
+                        <button type="submit" class="btn btn-default">Update</button>
                     </form>
                 </div>
             </div>
@@ -177,6 +173,13 @@
                     alert("Error");
                 }
             });
+        });
+
+        $.get("https://restcountries.eu/rest/v2/all" , function(data){
+        data.forEach(function(element){
+
+         $('.country').append('<option value="'+ element.name +'">'+ element.name +'</option>');});
+
         });
 
 

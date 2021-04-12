@@ -35,8 +35,7 @@
 				<input type="hidden" name="city" value="{{ $orderDetails->city }}">
  				<input type="hidden" name="zip" value="{{ $orderDetails->pincode }}">
 				<input type="hidden" name="email" value="{{ $orderDetails->user_email }}">
-				<input type="hidden" name="country" value="{{ $getCountryCode->countrycode }}">
-				<input type="hidden" name="return" value="{{ url('paypal/thanks') }}">
+ 				<input type="hidden" name="return" value="{{ url('paypal/thanks') }}">
 				<input type="hidden" name="cancel_return" value="{{ url('paypal/cancel') }}">
 				<input type="image"
 				    src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_107x26.png" alt="ادفع الان">

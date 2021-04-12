@@ -7,14 +7,10 @@ use Illuminate\Database\Seeder;
 
 class AdminTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
-    
+
         $admin = \App\Models\Admin::create([
             'name' => 'super_admin',
             'email' => 'super_admin@app.com',
@@ -23,6 +19,6 @@ class AdminTableSeeder extends Seeder
         ]);
 
         $admin->attachRole('super_admin');
- 
+
     }
 }

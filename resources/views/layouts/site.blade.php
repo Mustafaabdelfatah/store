@@ -54,6 +54,10 @@
     <script src="{{ asset('front/') }}/js/main.js"></script>
     <script src="{{ asset('front/js/jquery.validate.js') }}"></script>
     <script>
+
+
+      
+
         $(function () {
         $(document).on('click', '.favClass i', function (event) {
 

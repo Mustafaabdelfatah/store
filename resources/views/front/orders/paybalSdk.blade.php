@@ -32,8 +32,7 @@
                 <input type="hidden" name="city" value="{{ $orderDetails->city }}">
                 <input type="hidden" name="pincode" value="{{ $orderDetails->pincode }}">
 				<input type="hidden" name="email" value="{{ $orderDetails->user_email }}">
-				<input type="hidden" name="country" value="{{ $getCountryCode->countrycode }}">
-                 <input type="submit" name="" class="form-controller" id="">
+                  <input type="submit" name="" class="form-controller" id="">
 			</form>
 		</div>
 	</div>

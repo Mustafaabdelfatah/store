@@ -39,11 +39,8 @@
                             class="form-control" />
                         </div>
                         <div class="form-group">
-                            <select id="billing_country" name="billing_country" class="form-control">
+                            <select id="billing_country" name="billing_country" class="form-control country">
                                 <option value="">Select Country</option>
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->name  }}" @if(!empty($userDetails->country) && $country->name  == $userDetails->country) selected @endif>{{ $country->name  }}</option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -87,11 +84,9 @@
                         </div>
 
                         <div class="form-group">
-                            <select id="shipping_country" name="shipping_country" class="form-control">
+                            <select id="shipping_country" name="shipping_country" class="form-control country">
                                 <option value="">Select Country</option>
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->name }}" @if(!empty($shippingDetails->country) && $country->name == $shippingDetails->country) selected @endif>{{ $country->name }}</option>
-                                @endforeach
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -120,9 +115,6 @@
 @push('js')
 <script>
     $(function () {
-
-
-
         // Copy Billing Address to Shipping Address Script
         $("#copyAddress").click(function () {
             if (this.checked) {
@@ -144,10 +136,11 @@
             }
         });
 
+        $.get("https://restcountries.eu/rest/v2/all" , function(data){
+        data.forEach(function(element){
+         $('.country').append('<option value="'+ element.name +'">'+ element.name +'</option>');});
 
-
-
-
+        });
 
     });
 </script>

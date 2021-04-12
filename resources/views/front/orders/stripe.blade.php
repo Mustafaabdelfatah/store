@@ -69,8 +69,7 @@
                         <input type="hidden" name="address" value="{{ $orderDetails->address }}">
                         <input type="hidden" name="city" value="{{ $orderDetails->city }}">
                         <input type="hidden" name="pincode" value="{{ $orderDetails->pincode }}">
-                        <input type="hidden" name="country" value="{{ $getCountryCode->iso3 }}">
-                        <label for="card-element">
+                         <label for="card-element">
                             Credit or debit card
                         </label>
                         <div id="card-element">
