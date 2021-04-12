@@ -57,7 +57,8 @@
                                    <span class="btn-sm btn-success">{{ $coupon->getAmountType() }}</span>
                                @endif
                            </td>
-                             <td class="center"> {{dateFormat($coupon->expiry_date)}}
+                             {{-- <td class="center"> {{dateFormat($coupon->expiry_date)}} </td> --}}
+                             <td class="center"> {{$coupon->expiry_date}} </td>
 
                             <td>
                                 @if($coupon->getActive() == 'active')

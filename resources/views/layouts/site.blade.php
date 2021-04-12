@@ -56,7 +56,7 @@
     <script>
 
 
-      
+
 
         $(function () {
         $(document).on('click', '.favClass i', function (event) {
@@ -79,8 +79,12 @@
                 },
                 success: function (data) {
 
+                    // console.log(data.count);
                    thisSpan.toggleClass('fa-heart');
                    thisSpan.toggleClass('fa-heart-o');
+                   $('#fav').html('').append('<i class="fa fa-heart"> </i> Favorite ( ' +data.count+' ) ');
+
+
                     // var is_favorite = data.data.is_favorite;
                     // event = event || window.event; // IE
                     // var target = event.target || event.srcElement; // IE

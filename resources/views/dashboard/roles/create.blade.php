@@ -68,7 +68,7 @@
                                     @endif
 
 
-                                    <select name="permissions[]" required class="form-control select2" multiple>
+                                    <select name="permissions[]" class="form-control select2" multiple>
                                         @foreach ($permission_maps as $permission_map)
                                         <option value="{{ $permission_map . '_' . $model }}">
                                             {{-- {{ __('admin.'.$permission_map)  }} --}}

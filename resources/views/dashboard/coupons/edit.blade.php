@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="form-group text-left">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Update</button>
                     </div>
                 </form>
 

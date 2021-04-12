@@ -65,13 +65,20 @@ class FrontController extends Controller
         $fav = Favorite::where('user_id',$userId)->where('product_id',$product->id)->first() ;
          if($fav){
             $fav->delete();
-            return response()->json(['status' => 'The product has been removed from the Favorite']);
+            return response()->json([
+                'status' => 'The product has been removed from the Favorite',
+                'count' => Favorite::count(),
+                ]
+            );
          }else{
             Favorite::create([
                 'user_id' => $userId,
                 'product_id' => $product->id,
             ]);
-            return response()->json(['status' => 'The product has been added To the Favorite']);
+            return response()->json([
+                'status' => 'The product has been added To the Favorite',
+                'count' => Favorite::count(),
+                ]);
 
          }
 

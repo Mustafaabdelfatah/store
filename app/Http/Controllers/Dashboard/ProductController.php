@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Validator;
    {
        // get all categories
         $categories = Category::where(['parent_id' => 0])->get();
-		$categories_drop_down = "<option value='' selected disabled>كل الاقسام</option>";
+		$categories_drop_down = "<option value='' selected disabled>All Category</option>";
 		foreach($categories as $cat){
 			$categories_drop_down .= "<option value='".$cat->id."'>".$cat->name."</option>";
 			$sub_categories = Category::where(['parent_id' => $cat->id])->get();
@@ -63,19 +63,21 @@ use Illuminate\Support\Facades\Validator;
    public function store(Request $request)
    {
 
-    $validation = Validator::make($request->all(), [
-        'name'                   => 'required|max:255',
-        'description'            => 'required|max:1000',
-        'status'                 => 'required|in:active,un_active',
-        'category_id'            => 'required',
-        'cover'                 => 'required|mimes:jpg,jpeg,png|image',
-        'discount'               => 'required',
-        'price'               => 'required',
-        'code'               => 'required',
-        'color'               => 'required',
-        'care'               => 'required',
-        'feature_item'         => 'required|in:0,1',
-       ]);
+        $validation = $request->validate([
+            'name'                   => 'required|max:255',
+            'description'            => 'required|max:1000',
+            'status'                 => 'required|in:active,un_active',
+            'category_id'            => 'required',
+            'cover'                 => 'required|mimes:jpg,jpeg,png|image',
+            'discount'               => 'required',
+            'price'               => 'required',
+            'code'               => 'required',
+            'color'               => 'required',
+            'care'               => 'required',
+            'feature_item'         => 'required|in:0,1',
+        ]);
+
+
 
        $request->merge(['external_id' => auth()->guard('admin')->user()->id , 'type' => 'admin']);
 
@@ -113,7 +115,7 @@ use Illuminate\Support\Facades\Validator;
 
         $categories = Category::where(['parent_id' => 0])->get();
 
-		$categories_drop_down = "<option value='' disabled>كل الاقسام</option>";
+		$categories_drop_down = "<option value='' disabled>All Category</option>";
 		foreach($categories as $cat){
 			if($cat->id==$product->category_id){
 				$selected = "selected";
@@ -145,18 +147,19 @@ use Illuminate\Support\Facades\Validator;
         $products = Product::findOrFail($id);
 
        // Validate data
-       $validation = Validator::make($request->all(), [
-        'name'                   => 'required|max:255',
-        'description'            => 'required|max:1000',
-        'status'                 => 'required|in:active,un_active',
-        'feature_item'                 => 'required|in:1,0',
-        'category_id'            => 'required',
-        'discound'               => 'required',
-        'color'                  => 'required',
-        'price'                  => 'required',
-        'code'                   => 'required',
-        'care'                   => 'required',
-       ]);
+
+         $validation = $request->validate([
+            'name'                   => 'required|max:255',
+            'description'            => 'required|max:1000',
+            'status'                 => 'required|in:active,un_active',
+            'feature_item'           => 'required|in:1,0',
+            'category_id'            => 'required',
+            'discount'               => 'required',
+            'color'                  => 'required',
+            'price'                  => 'required',
+            'code'                   => 'required',
+            'care'                   => 'required',
+        ]);
 
        $request->merge(['external_id' => auth()->guard('admin')->user()->id , 'type' => 'admin']);
 
@@ -821,18 +824,19 @@ use Illuminate\Support\Facades\Validator;
 
             // dd(session()->get('CouponCode'));
             if(empty(Session::get('CouponCode'))){
-               $coupon_code = '';
+               $coupon_code = 'null';
             }else{
                $coupon_code = Session::get('CouponCode');
             }
 
 
             if(empty(Session::get('CouponAmount'))){
-               $coupon_amount = '';
+               $coupon_amount = '0';
             }else{
                $coupon_amount = Session::get('CouponAmount');
             }
 
+            // return $coupon_amount;
             $order = new Order;
             $order->name = $shippingDetails->name;
             $order->user_id = $user_id;

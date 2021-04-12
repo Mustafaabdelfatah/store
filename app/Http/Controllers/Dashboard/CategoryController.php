@@ -41,13 +41,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        try{
 
-            $validation = Validator::make($request->all(), [
-                'name'                  => 'required|max:255',
-                'url'              => 'required|max:1000',
+
+            $validation = $request->validate([
+                'name' => 'required|max:255',
+                'url'              => 'required|max:100',
                 'description'           => 'required|max:1000',
-               ]);
+            ]);
 
             $request->merge(['parent_id' => $request->parent_id]);
 
@@ -62,13 +62,6 @@ class CategoryController extends Controller
 
             session()->flash('success', 'Category has been Added successfully');
             return redirect()->route('dashboard.categories.index');
-
-
-        }catch (\Exception $ex){
-            dd($ex);
-            return redirect()->route('dashboard.categories.index')->with('errors','هناك خطا ما ');
-        }
-
 
     }
 
@@ -85,30 +78,18 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 
-        try{
-
-
-            $validation = Validator::make($request->all(), [
-                'name'                  => 'required',
-                 'url'              => 'required',
-                'description'              => 'required',
-               ]);
-
+             $validation = $request->validate([
+                'name' => 'required|max:255',
+                'url'              => 'required|max:100',
+                'description'           => 'required|max:1000',
+            ]);
             if (!$request->has('status'))
             $request->request->add(['status' => 'un_active']);
             else
             $request->request->add(['status' => 'active']);
-
             $category = Category::findOrFail($id)->update($request->all());
-
             session()->flash('success', 'Category has been updated successfully');
-             return redirect()->route('dashboard.categories.index');
-        }catch(\Exception $ex){
-            dd($ex);
-            return redirect()->route('dashboard.categories.index')->with('error','هناك خطا ما ');
-
-        }
-
+            return redirect()->route('dashboard.categories.index');
 
     }
 

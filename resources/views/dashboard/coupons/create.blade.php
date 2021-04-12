@@ -24,7 +24,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="projectinput1">Coupone Code <span class="text-danger">*</span></label>
-                                <input type="text" value="{{ old('coupon_code') }}" id="coupon_code" class="form-control" maxlength="15" minlength="5" placeholder=" " name="coupon_code" required>
+                                <input type="text" value="{{ old('coupon_code') }}" id="coupon_code" class="form-control" maxlength="20" minlength="5" placeholder=" " name="coupon_code" required>
                                 @error("coupon_code")
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

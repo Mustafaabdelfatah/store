@@ -15,8 +15,8 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> +01552923438</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> mustafa.salama2608@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -42,29 +42,7 @@
                     <div class="logo pull-left">
                         <a href="{{ url('/') }}"><img src="{{ asset('front/') }}/images/home/logo.png" alt="" /></a>
                     </div>
-                    <div class="btn-group pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                USA
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">UK</a></li>
-                            </ul>
-                        </div>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                DOLLAR
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                     <div class="col-sm-8">
                     <div class="shop-menu pull-right">
@@ -72,11 +50,16 @@
                             @auth
                             <li><a href="{{ url('/orders') }}"><i class="fa fa-crosshairs"></i> orders</a></li>
                             <li>
-                                <a href="{{ route('favorite_products') }}"><i class="fa fa-crosshairs"></i>
-                                 Favorite ( {{ App\Models\Favorite::count() }} )
+                                <a href="{{ route('favorite_products') }}" id="fav">
+                                    <i class="fa fa-heart"></i>
+                                    Favorite ( {{ App\Models\Favorite::count() }} )
                                 </a>
                             </li>
-                             <li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart"></i> Cart ({{ $itemCount }})</a></li>
+                             <li>
+                                 <a href="{{ url('/cart') }}" >
+                                    <i class="fa fa-shopping-cart"></i> ({{ $itemCount }})
+                                </a>
+                            </li>
 
                             <li><a href="{{ url('/account') }}"><i class="fa fa-user"></i> Account </a></li>
                             <li><a href="{{ url('front/logout') }}"><i class="fa fa-sign-out fa-lg"></i> Logout </a></li>
@@ -121,8 +104,7 @@
                                     <li><a href="blog-single.html">Blog Single</a></li>
                                 </ul>
                             </li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                             <li><a href="{{ url('contact-page') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div>

@@ -33,10 +33,7 @@ class CouponsController extends Controller
     // STORE DATA
     public function store(Request $request)
     {
-        try{
-
          //Validate data
-
         $request->validate([
             'coupon_code' => 'required|unique:coupons,coupon_code|max:15',
             'amount' => 'required|numeric|min:0|max:99',
@@ -44,21 +41,12 @@ class CouponsController extends Controller
             'expiry_date'=> 'required|date|date_format:Y-m-d',
             'status' => 'required|in:active,un_active',
         ]);
-
-
         // implement model
         $store = Coupon::create($request->all());
         // return session with success msg
         session()->flash('success', "Coupone Has Been Added Succefully");
         // retun index
         return redirect()->route('dashboard.coupons.index');
-
-        }catch(\Exception $ex){
-            dd($ex);
-
-            return redirect()->route('dashboard.coupons.index')->with('error','هناك خطا ما ');
-        }
-
     }//end of store
 
     public function edit(Request $request,$id)

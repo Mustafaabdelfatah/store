@@ -3,12 +3,12 @@
 @section('content')
 
     <div>
-        <h2>الموظفين</h2>
+        <h2>Users</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"> Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('dashboard.users.index') }}">الموظفين</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.users.index') }}">Users</a></li>
         <li class="breadcrumb-item active">Edit</li>
     </ul>
 
@@ -31,7 +31,7 @@
 
                     {{--email--}}
                     <div class="form-group">
-                        <label>البريد الالكتروني</label>
+                        <label>Email</label>
                         <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}">
                         @error('email')
                         <span class="text-danger">{{$message}} </span>
@@ -40,17 +40,17 @@
 
                      {{--password--}}
                      <div class="form-group">
-                        <label for="projectinput1">   كلمه المرور </label>
+                        <label for="projectinput1">Password</label>
                         <input type="password" name="password" value="" id="password"
                                class="form-control"
-                               placeholder="ادخل كلمه المرور "
+                               placeholder="Enter Your Password "
                                name="password">
                         @error('password')
                         <span class="text-danger">{{$message}} </span>
                         @enderror
                     </div>
                     <div class="form-group text-left">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Update</button>
                     </div>
 
                 </form><!-- end of form -->

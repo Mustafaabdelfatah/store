@@ -5,7 +5,7 @@
 
 
 <div>
-    <h2>   صور المنتج </h2>
+    <h2>   Product Images </h2>
 </div>
 
 @if(Session::has('flash_message_error'))

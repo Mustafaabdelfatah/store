@@ -20,8 +20,6 @@
                     @csrf
                     @method('post')
 
-                    @include('dashboard.includes._errors')
-
                     {{--name--}}
                     <div class="form-group">
                         <label>Name</label>
