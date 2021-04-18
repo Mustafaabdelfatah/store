@@ -195,6 +195,7 @@
                 },
                 success: function (data) {
 
+
                     var total_stock = data.data.stock;
 
                     // $qty = $('.qty').val();

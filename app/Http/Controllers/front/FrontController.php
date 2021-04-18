@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Favorite;
 use App\Models\Transaction;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,19 @@ class FrontController extends Controller
 {
     public function index()
     {
+
+
+        // $images = Images::where(['product_id'=>1])->get();
+        // $images = json_decode(json_encode($images));
+
+        //  foreach($images as $img){
+        //     $img_ids[] = $img->product_id;
+        // }
+        // // print_r($img_ids);die;
+        // foreach (OrderProduct::where('product_id',$img_ids)->get() as $key => $value) {
+        //     dd($value->product->images()->first()->product);
+        // }
+
         // $products = Product::with('transactions')->orderBy('id','DESC')->get();
 
         $products = Product::with('transactions','fav')->inRandomOrder()->where(['status'=>'active','feature_item'=>'1'])->paginate(3);
@@ -35,6 +49,7 @@ class FrontController extends Controller
 
     public function change_price(Request $request){
 
+        // return $request->all();
         $trans = Transaction::find($request->id);
         return response()->json([
             'data' => Transaction::find($request->id),

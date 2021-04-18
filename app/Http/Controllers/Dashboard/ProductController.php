@@ -477,59 +477,32 @@ use Illuminate\Support\Facades\Validator;
     		$subCategories = Category::where(['parent_id'=>$categoryDetails->id])->get();
     		$subCategories = json_decode(json_encode($subCategories));
 
-            // $cat_ids = "";
-            // foreach($subCategories as $index => $subcat){
-            //      $cat_ids .= $subcat->id;
-            // }
-            // echo $cat_ids; die;
+
     		foreach($subCategories as $subcat){
                 $cat_ids[] = $subcat->id;
     		}
             // print_r($cat_ids);die;
     	    $productsAll = Product::with('transactions','fav')->whereIn('category_id', $cat_ids)->where('status','active')->orderBy('products.id','Desc');
-            $breadcrumb = "<a href='/'>Home</a> / <a href='".$categoryDetails->url."'>".$categoryDetails->name."</a>";
-    	}else{
+     	}else{
             //if url is sub category
      		$productsAll = Product::with('transactions','fav')->where(['category_id'=>$categoryDetails->id])->where('status','active')->orderBy('products.id','Desc');
             $mainCategory = Category::where('id',$categoryDetails->parent_id)->first();
-            $breadcrumb = "<a href='/'>Home</a> / <a href='".$mainCategory->url."'>".$mainCategory->name."</a> / <a href='".$categoryDetails->url."'>".$categoryDetails->name."</a>";
-    	}
+     	}
 
-        if(!empty($_GET['color'])){
-            $colorArray = explode('-',$_GET['color']);
-            $productsAll = $productsAll->whereIn('products.color',$colorArray);
-        }
 
-        if(!empty($_GET['size'])){
-            $sizeArray = explode('-',$_GET['size']);
-            $productsAll = $productsAll->join('products_attributes','products_attributes.product_id','=','products.id')
-            ->select('products.*','products_attributes.product_id','products_attributes.size')
-            ->groupBy('products_attributes.product_id')
-            ->whereIn('products_attributes.size',$sizeArray);
-        }
 
         $productsAll = $productsAll->paginate(6);
         /*$productsAll = json_decode(json_encode($productsAll));
         echo "<pre>"; print_r($productsAll); die;*/
 
-        /*$colorArray = array('Black','Blue','Brown','Gold','Green','Orange','Pink','Purple','Red','Silver','White','Yellow');*/
 
-         $colorArray = Product::select('color')->groupBy('color')->get();
-         $colorArray = json_decode(json_encode($colorArray));
-
-        $colorArray = array_flatten($colorArray,true);
-
-
-
-        $sizesArray = Transaction::select('size')->groupBy('size')->get();
-        $sizesArray = array_flatten(json_decode(json_encode($sizesArray),true));
         /*echo "<pre>"; print_r($sizesArray); die;*/
 
         $meta_title = $categoryDetails->meta_title;
         $meta_description = $categoryDetails->meta_description;
     	$meta_keywords = $categoryDetails->meta_keywords;
 
-    	return view('front.products.listing_product')->with(compact('categories','productsAll','banners','categoryDetails','meta_title','meta_description','meta_keywords','url','colorArray','sizesArray','breadcrumb'));
+    	return view('front.products.listing_product')->with(compact('categories','productsAll','banners','categoryDetails','meta_title','meta_description','meta_keywords','url'));
     }
 
 
@@ -803,11 +776,11 @@ use Illuminate\Support\Facades\Validator;
         $shippingDetails = json_decode(json_encode($shippingDetails));
         $userCart = DB::table('carts')->where(['user_id' => $user_id])->get();
         foreach($userCart as $key => $product){
-            $productDetails = Product::where('id',$product->product_id)->first();
-             $userCart[$key]->cover = $productDetails->cover_path;
+            return $productDetails = Product::where('id',$product->product_id)->first();
+            $userCart[$key]->cover = $productDetails->cover_path;
 
         }
-        // echo "<pre>"; print_r($userCart); die;
+        echo "<pre>"; print_r($userCart); die;
         return view('front.products.order_review')->with(compact('userDetails','shippingDetails','userCart'));
     }
 
