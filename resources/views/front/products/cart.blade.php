@@ -19,13 +19,14 @@
                 padding: -9px;
                 line-height: 20px;
             }
-           .cart_delete .delete{
-                    width: 25px;
-                    height: 26px;
-                    font-size: 10px;
 
-                    line-height: 20px;
-                    text-align: center;
+            .cart_delete .delete {
+                width: 25px;
+                height: 26px;
+                font-size: 10px;
+
+                line-height: 20px;
+                text-align: center;
             }
 
             .cart_quantity_input {
@@ -131,7 +132,6 @@
 
                                 <tr class="bottom_button">
                                     <td>
-                                        <a class="gray_btn" href="#">Update Cart</a>
                                     </td>
                                     <td>
 
@@ -141,24 +141,39 @@
                                     </td>
                                     <td>
                                         <div class="cupon_text d-flex align-items-center">
-                                            <input type="text" placeholder="Coupon Code">
-                                            <a class="primary-btn" href="#">Apply</a>
-                                            <a class="gray_btn" href="#">Close Coupon</a>
+                                            <form id="cpnForm" action="{{ url('/cart/apply-coupon') }}" method="post">
+                                                @csrf
+                                                {{-- <button type="submit" title="Apply" class="btn"> --}}
+                                                <input type="text" name="coupon_code" placeholder="Coupon Code">
+
+                                            </form>
+                                            <a
+                                                class="primary-btn"onclick="document.getElementById('cpnForm').submit();">Apply</a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+                                        <h5>total price</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
 
-                                    </td>
-                                    <td>
+                                            ${{ $cart->price * $cart->quantity }}
 
+                                        </h5>
                                     </td>
                                     <td>
-                                        <h5>Subtotal</h5>
+                                        @if (session()->has('CouponCode'))
+                                            <h5>after coupon</h5>
+                                        @endif
                                     </td>
                                     <td>
-                                        <h5>$2160.00</h5>
+                                        @if (session()->has('CouponCode'))
+                                            <h5>
+                                                {{ Session::get('CouponAmount') }}
+                                            </h5>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr class="shipping_area">

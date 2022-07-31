@@ -461,7 +461,7 @@ class ProductController extends Controller
         }
 
         // Get Product Details
-        $productDetails = Product::with('transactions','category')->where('id', $id)->first();
+        $productDetails = Product::with('transactions', 'category')->where('id', $id)->first();
 
         //related product
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
@@ -528,7 +528,8 @@ class ProductController extends Controller
             $data['user_email'] = Auth::user()->email;
         }
         $countProducts = DB::table('carts')->where([
-            'product_id' => $data['product_id'], 'user_id' => auth()->user()->id])->count();
+            'product_id' => $data['product_id'], 'user_id' => auth()->user()->id
+        ])->count();
         if ($countProducts > 0) {
             session()->flash('success', 'Product Already Exist In Cart');
             return redirect()->back();
@@ -543,7 +544,7 @@ class ProductController extends Controller
             $cart->quantity = $request->quantity;
             $cart->name = $request->name;
             $cart->code = $getSKU['sku'];
-            $cart->color = $request->color;
+            $cart->color = isset($request->color) ? $request->color : '';
             $cart->price = $getSKU['price'];
             $cart->size = $request->size;
             $cart->save();
@@ -646,7 +647,6 @@ class ProductController extends Controller
             } else {
                 $couponAmount =   $total_amount * ($coupon->amount / 100);
             }
-
             // Add Coupon Code & Amount in Session
             Session::put('CouponAmount', $couponAmount);
             Session::put('CouponCode', $data['coupon_code']);
