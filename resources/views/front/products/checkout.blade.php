@@ -24,13 +24,13 @@
                         <!--login form-->
                         <h2>Bill To</h2>
                         <div class="form-group">
-                            <input name="billing_name" id="billing_name" @if(!empty($userDetails->name))
-                            value="{{ $userDetails->name }}" @endif type="text" placeholder="Billing Name"
+                            <input name="user_id" style="display: none;" id="billing_name" @if(!empty($userDetails->name))
+                            value="{{ $userDetails->id }}" @endif type="text" placeholder="Billing Name"
                             class="form-control" />
                         </div>
                         <div class="form-group">
-                            <input name="billing_address" id="billing_address" @if(!empty($userDetails->address))
-                            value="{{ $userDetails->address }}" @endif type="text" placeholder="Billing Address"
+                            <input name="user_email" id="billing_address" @if(!empty($userDetails->email))
+                            value="{{ $userDetails->email }}" @endif type="email" placeholder="Billing Address"
                             class="form-control" />
                         </div>
                         <div class="form-group">
@@ -39,8 +39,11 @@
                             class="form-control" />
                         </div>
                         <div class="form-group">
-                            <select id="billing_country" name="billing_country" class="form-control country">
-                                <option value="">Select Country</option>
+                            <select id="billing_country" name="country" class="form-control country">
+                                @foreach ($countries as $country)
+                                    <option value="{{$country->name}}">{{$country->name}}</option>
+
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -84,9 +87,11 @@
                         </div>
 
                         <div class="form-group">
-                            <select id="shipping_country" name="shipping_country" class="form-control country">
-                                <option value="">Select Country</option>
+                            <select id="shipping_country" name="country" class="form-control country">
+                                @foreach ($countries as $country)
+                                    <option value="{{$country->name}}">{{$country->name}}</option>
 
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

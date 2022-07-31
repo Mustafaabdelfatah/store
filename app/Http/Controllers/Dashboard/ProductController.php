@@ -673,7 +673,7 @@ class ProductController extends Controller
     }
     public function docheckout(Request $request)
     {
-
+dd($request);
         $user_id = Auth::user()->id;
         $user_email = Auth::user()->email;
 
