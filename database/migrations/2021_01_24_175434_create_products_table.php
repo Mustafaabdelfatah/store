@@ -20,12 +20,12 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->longText('description');
-            $table->decimal('discount',8,2);
+            $table->decimal('discount', 8, 2);
             $table->text('price');
             $table->string('cover')->default('default.png');
             $table->enum('status', ['active', 'un_active'])->default('active');
             $table->enum('type', ['admin', 'user'])->default('admin');
-            $table->text('color');
+            $table->text('color')->nullable();
             $table->text('code');
             $table->text('care');
             $table->tinyInteger('feature_item')->default('0');
