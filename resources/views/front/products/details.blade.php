@@ -79,8 +79,6 @@
                                     <input type="text" id="sst" maxlength="12" value="1" title="Quantity:"
                                         class="input-text qty" name="quantity" />
                                 @endif
-
-
                             </div>
                             <div class="card_area d-flex align-items-center">
                                 <button type="submit" class="primary-btn cart" id="cartButton">

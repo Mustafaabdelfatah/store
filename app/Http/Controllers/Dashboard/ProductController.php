@@ -639,9 +639,7 @@ class ProductController extends Controller
             foreach ($getItem as $item) {
                 $total_amount = $total_amount + ($item->price * $item->quantity);
             }
-
             //Check if amount type is Fixed or Percentage
-
             if ($coupon->amount_type == 'Fixed') {
                 $couponAmount = $coupon->amount;
             } else {
@@ -650,9 +648,13 @@ class ProductController extends Controller
             // Add Coupon Code & Amount in Session
             Session::put('CouponAmount', $couponAmount);
             Session::put('CouponCode', $data['coupon_code']);
+            // dd($couponAmount);
+            // dd($total_amount);
+
             session()->flash('success', 'Coupone is work ? You Have a Discound Now ');
             return redirect()->back();
-        }
+
+         }
     }
 
     public function checkout(Request $request)

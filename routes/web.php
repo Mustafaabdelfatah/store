@@ -51,7 +51,7 @@ Route::group(['middleware' => 'front'], function () {
     Route::post('/update-user-pwd', 'front\FrontAuth@updatePassword');
 
     // Cart Page
-    Route::match(['get', 'post'], '/cart', 'Dashboard\ProductController@cart');
+    Route::match(['get', 'post'], '/cart', 'Dashboard\ProductController@cart')->name('cart');
 
     // Add to Cart Route
     Route::match(['get', 'post'], '/add-cart', 'Dashboard\ProductController@addtocart')->name('product.add-cart');
